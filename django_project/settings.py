@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # From me in particular
     'santa_app',
+    'bootstrap5',
 
 ]
 
