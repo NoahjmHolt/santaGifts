@@ -4,8 +4,8 @@ from django.urls import reverse
 # Create your models here.
 class Item(models.Model):
         title = models.CharField(max_length=200)
-        contact_email = models.CharField(max_length=200)
-        is_active = models.BooleanField(default=False)
+        website_found = models.CharField(max_length=200, blank=True)
+        price = models.CharField(max_length=10)
         about = models.TextField(blank=True)
 
         def __str__(self):
