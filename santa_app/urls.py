@@ -12,6 +12,8 @@ urlpatterns = [
     path('items/', views.ItemListView.as_view(), name= 'items'),
     path('item/<int:pk>', views.ItemDetailView.as_view(), name='item-details'),
 
+    #forms
     #path('item/<int:item_id>/create_item/', views.CreateItem, name='create_item'),
+    path('create_item/', views.CreateItem, name='create_item'),
 
 ]

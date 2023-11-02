@@ -1,16 +1,18 @@
 <!-- inherit from base.html -->
-{% extends 'santa_app/base_template.html' %}
+{% extends 'santa_app/index.html' %}
+{% load static %}
 
 <!-- Replace block content in base_template.html -->
 {% block content %}
 
+    <p></p>
     <form action="" method="POST">
 
-    {% csrf_token %}
-    <table>
-    {{ form.as_table }}
-    </table>
-    <input type="submit" name="Submit">
+        {% csrf_token %}
+        
+        <table>{{item_form.as_table}}</table>
+        <input type="submit" class="btn-info" name="Submit" value="Ask Santa ;) !">
+
     </form>
 
 {% endblock %}
