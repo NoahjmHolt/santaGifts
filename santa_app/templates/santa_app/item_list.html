@@ -25,13 +25,13 @@
         </thead>
         <tbody>
             {% for item in item_list %}
-                <tr onclick="{{ item.get_absolute_url }}">
+                <tr>
                     <td>ME!</td>
-                    <td>{{item.title}}</td>
+                    <td><a class="btn btn-small btn-info btn-block" href="{{ item.get_absolute_url }}">{{item.title}}</a></td>
                     <td>{{item.price}}</td>
                     <td>{{item.website_found}}</td>
-                    <td>Update</td>
-                    <td>Remove</td>
+                    <td><a class="btn btn-small btn-info btn-block">Update</a></td>
+                    <td><a class="btn btn-small btn-info btn-block">Remove</a></td>
                 </tr>
             {% endfor %}
         </tbody>
