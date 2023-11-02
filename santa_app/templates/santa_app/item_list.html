@@ -2,15 +2,24 @@
 
 {% block content %}
     <h1>Item List</h1>
+    <!-- Big Create button  -->
+    <a class="btn btn-info btn-block" href="">Create Item</a>
 
     {% if item_list %}
     <ul>
         {% for item in item_list %}
         <li>
-        <a href="{{ item.get_absolute_url }}">{{ item.title }}</a> <!-- Here still lies the problem.  -->
+        <a href="{{ item.get_absolute_url }}">{{ item.title }}</a>
         </li>
         {% endfor %}
     </ul>
+
+    <!-- Want to organize into table instead of unordered list later  -->
+    <!-- Resource: https://getbootstrap.com/docs/4.0/content/tables/ -->
+    <table class="table">
+
+    </table>
+
     {% else %}
         <p>There are no items registered.</p>
     {% endif %}
