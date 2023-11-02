@@ -4,6 +4,7 @@
     <h1>Item List</h1>
     <!-- Big Create button  -->
     <a class="btn btn-info btn-block" href="">Create Item</a>
+    <p></p>
 
     {% if item_list %}
     <!-- Want to organize into table instead of unordered list later  -->
@@ -31,7 +32,7 @@
                     <td>{{item.price}}</td>
                     <td>{{item.website_found}}</td>
                     <td><a class="btn btn-small btn-info btn-block">Update</a></td>
-                    <td><a class="btn btn-small btn-info btn-block">Remove</a></td>
+                    <td><a class="btn btn-small btn-danger btn-block">Remove</a></td>
                 </tr>
             {% endfor %}
         </tbody>
