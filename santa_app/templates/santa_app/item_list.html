@@ -6,17 +6,35 @@
     <a class="btn btn-info btn-block" href="">Create Item</a>
 
     {% if item_list %}
-    <ul>
-        {% for item in item_list %}
-        <li>
-        <a href="{{ item.get_absolute_url }}">{{ item.title }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-
     <!-- Want to organize into table instead of unordered list later  -->
     <!-- Resource: https://getbootstrap.com/docs/4.0/content/tables/ -->
+    <!-- I like the lood created from the videos so going with that -->
+    <!-- Videos: https://www.youtube.com/watch?v=7a23TbUXfWE&list=PL-51WBLyFTg2vW-_6XBoUpE7vpmoR3ztO&index=8  -->
     <table class="table">
+
+        <!-- Table Catagories  -->
+        <thead>
+            <tr>
+                <th scope="col">Recipient</th>
+                <th scope="col">Item Name</th>
+                <th scope="col">Item Price</th>
+                <th scope="col">Item Website</th>
+                <th scope="col">Update Item</th>
+                <th scope="col">Remove Item</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in item_list %}
+                <tr onclick="{{ item.get_absolute_url }}">
+                    <td>ME!</td>
+                    <td>{{item.title}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.website_found}}</td>
+                    <td>Update</td>
+                    <td>Remove</td>
+                </tr>
+            {% endfor %}
+        </tbody>
 
     </table>
 
