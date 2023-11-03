@@ -15,5 +15,6 @@ urlpatterns = [
     #forms
     #path('item/<int:item_id>/create_item/', views.CreateItem, name='create_item'),
     path('create_item/', views.CreateItem, name='create_item'),
+    path('update_item/<int:pk>', views.UpdateItem, name='update_item'),
 
 ]
