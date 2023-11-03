@@ -44,3 +44,15 @@ def UpdateItem(request, pk):
      context = {'item_form':item_form}
 
      return render(request, 'santa_app/item_form.html', context)
+
+
+def DeleteItem(request, pk):
+     
+     item = Item.objects.get(id=pk)
+
+     if request.method == 'POST':
+          item.delete()
+          return redirect('/items')
+
+     context = {'item':item}
+     return render(request, 'santa_app/delete.html', context)

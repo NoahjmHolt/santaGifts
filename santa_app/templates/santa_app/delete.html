@@ -5,6 +5,15 @@
 <!-- Replace block content in base_template.html -->
 {% block content %}
 
-    <p>Are you sure you want to remove {{item}} from your santa list?</p>
+    <p>Are you sure you want to remove {{item.title}} from your santa list?</p>
+
+    <form action="{% url 'delete_item' item.id %}" method="POST">
+
+        {% csrf_token %}
+
+        <a class="btn-info btn" href="{% url 'items' %}">No! Leave it!</a>
+        <input type="submit" name="Confirm" class="btn-danger btn"  value="I don't want it!">
+
+    </form>
 
 {% endblock %}

@@ -13,8 +13,8 @@ urlpatterns = [
     path('item/<int:pk>', views.ItemDetailView.as_view(), name='item-details'),
 
     #forms
-    #path('item/<int:item_id>/create_item/', views.CreateItem, name='create_item'),
     path('create_item/', views.CreateItem, name='create_item'),
     path('update_item/<int:pk>', views.UpdateItem, name='update_item'),
+    path('delete_item/<int:pk>', views.DeleteItem, name='delete_item'),
 
 ]

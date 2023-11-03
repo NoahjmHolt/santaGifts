@@ -32,7 +32,7 @@
                     <td>{{item.price}}</td>
                     <td>{{item.website_found}}</td>
                     <td><a class="btn btn-small btn-info btn-block" href="{% url 'update_item' item.id %}">Update</a></td>
-                    <td><a class="btn btn-small btn-danger btn-block">Remove</a></td>
+                    <td><a class="btn btn-small btn-danger btn-block" href="{% url 'delete_item' item.id %}">Remove</a></td>
                 </tr>
             {% endfor %}
         </tbody>
