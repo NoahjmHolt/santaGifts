@@ -19,6 +19,12 @@
             body {background-color: lightgray}
             table {background-color: white}
             nav {font-weight: bold}
+
+            .hello_msg{
+                font-size: 18px;
+                margin-right: 15px;
+            }
+
         </style>
 
     </head>
@@ -42,8 +48,8 @@
                 </div>
             </div>
 
-            <span>Hello, {{request.user}}</span>
-            <span><a href="{% url 'logout' %}">Logout</span>
+            <span class="hello_msg">Hello, {{request.user}}</span>
+            <span ><a class="hello_msg" href="{% url 'logout' %}">Logout</a></span>
 
         </nav>
 
