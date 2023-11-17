@@ -17,7 +17,7 @@ class ItemDetailView(generic.DetailView):
 
 def RegisterPage(request):
      form = UserCreationForm()
-     context = {'form'}
+     context = {'form':form}
      return render(request, 'santa_app/register.html', context)
 
 def LoginPage(request):
