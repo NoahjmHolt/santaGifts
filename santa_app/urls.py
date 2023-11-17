@@ -20,5 +20,6 @@ urlpatterns = [
     #login/reg/logout
     path('register/', views.RegisterPage, name='register'),
     path('login/', views.LoginPage, name='login'),
+    path('logout/', views.LogoutUser, name='logout'),
 
 ]
