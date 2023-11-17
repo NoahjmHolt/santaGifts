@@ -16,15 +16,15 @@ class ItemDetailView(generic.DetailView):
       model = Item
 
 def RegisterPage(request):
-     form = UserCreationForm()
+     user_form = UserCreationForm()
 
      if request.method == 'POST':
-          form = UserCreationForm(request.POST)
-          if form.is_valid():
-               form.save
+          user_form = UserCreationForm(request.POST)
+          if user_form.is_valid():
+               user_form.save()
 
 
-     context = {'form':form}
+     context = {'user_form':user_form}
      return render(request, 'santa_app/register.html', context)
 
 def LoginPage(request):
