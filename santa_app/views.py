@@ -17,6 +17,13 @@ class ItemDetailView(generic.DetailView):
 
 def RegisterPage(request):
      form = UserCreationForm()
+
+     if request.method == 'POST':
+          form = UserCreationForm(request.POST)
+          if form.is_valid():
+               form.save
+
+
      context = {'form':form}
      return render(request, 'santa_app/register.html', context)
 
