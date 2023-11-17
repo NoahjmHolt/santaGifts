@@ -16,10 +16,10 @@ class ItemDetailView(generic.DetailView):
       model = Item
 
 def RegisterPage(request):
-     user_form = UserCreationForm()
+     user_form = CreateUserForm()
 
      if request.method == 'POST':
-          user_form = UserCreationForm(request.POST)
+          user_form = CreateUserForm(request.POST)
           if user_form.is_valid():
                user_form.save()
 
