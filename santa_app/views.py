@@ -4,11 +4,10 @@ from django.http import HttpResponse
 from .models import *
 from django.views import generic
 from .forms import *
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def index(request):
-
-# Render index.html
     return render( request, 'santa_app/index.html')
 
 class ItemListView(generic.ListView):
@@ -17,7 +16,8 @@ class ItemDetailView(generic.DetailView):
       model = Item
 
 def RegisterPage(request):
-     context = {}
+     form = UserCreationForm()
+     context = {'form'}
      return render(request, 'santa_app/register.html', context)
 
 def LoginPage(request):
