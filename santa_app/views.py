@@ -16,6 +16,14 @@ class ItemListView(generic.ListView):
 class ItemDetailView(generic.DetailView):
       model = Item
 
+def RegisterPage(request):
+     context = {}
+     return render(request, 'santa_app/register.html', context)
+
+def LoginPage(request):
+     context = {}
+     return render(request, 'santa_app/login.html', context)
+
 def CreateItem(request):
      
      item_form = ItemForm()
