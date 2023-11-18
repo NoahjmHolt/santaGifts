@@ -1,14 +1,20 @@
 from typing import Any
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import *
 from django.views import generic
+
+from .models import *
 from .forms import *
+from .decorators import *
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+
 
 # Create your views here.
 def index(request):
-
-# Render index.html
     return render( request, 'santa_app/index.html')
 
 class ItemListView(generic.ListView):
@@ -16,6 +22,49 @@ class ItemListView(generic.ListView):
 class ItemDetailView(generic.DetailView):
       model = Item
 
+
+@unautherized_access
+def RegisterPage(request):
+
+     form = CreateUserForm()
+
+     if request.method == 'POST':
+          form = CreateUserForm(request.POST)
+          if form.is_valid():
+               form.save()
+               messages.success(request, 'Account creation successful!')
+               return redirect('login')
+
+     context = {'form':form}
+     return render(request, 'santa_app/register.html', context)
+
+
+@unautherized_access
+def LoginPage(request):
+
+     if request.method == 'POST':
+          username = request.POST.get('username')
+          password = request.POST.get('password')
+
+          user = authenticate(request, username=username, password=password)
+
+          if user is not None:
+               login(request, user)
+               return redirect('items')
+          else:
+               messages.info(request, 'Username OR Password is incorrect')
+
+     context = {}
+     return render(request, 'santa_app/login.html', context)
+
+
+def LogoutUser(request):
+     logout(request)
+     return redirect('login')
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_groups=['admins', 'recipients'])
 def CreateItem(request):
      
      item_form = ItemForm()
@@ -30,6 +79,9 @@ def CreateItem(request):
      
      return render(request, 'santa_app/item_form.html', context)
 
+
+@login_required(login_url='login')
+@allowed_users(allowed_groups=['admins', 'recipients'])
 def UpdateItem(request, pk):
      
      item = Item.objects.get(id=pk)
@@ -46,6 +98,8 @@ def UpdateItem(request, pk):
      return render(request, 'santa_app/item_form.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_groups=['admins'])
 def DeleteItem(request, pk):
      
      item = Item.objects.get(id=pk)

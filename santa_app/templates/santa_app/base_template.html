@@ -18,7 +18,19 @@
             div {text-align: center;}
             body {background-color: lightgray}
             table {background-color: white}
-            nav {font-weight: bold}
+            nav {
+                font-weight: bold;
+                background-color: gray;
+                color: white;
+            }
+
+            .hello_msg{
+                font-size: 18px;
+                margin: 15px;
+                color: white;
+
+            }
+
         </style>
 
     </head>
@@ -26,24 +38,25 @@
     <body>
         <div class="container-fluid">
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <img src="{% static 'images/secret_santa.gif' %}">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                        <a class="hello_msg" href="{% url 'index' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="{% url 'items' %}">Items</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="#">Menu 2</a>
+                        <a class="hello_msg" href="{% url 'items' %}">Items</a>
                         </li>
                     </ul>
                 </div>
             </div>
+
+            <span class="hello_msg">Hello, {{request.user}}</span>
+            <span ><a class="hello_msg" href="{% url 'logout' %}">Logout</a></span>
+
         </nav>
 
         <!-- add block content from html template -->

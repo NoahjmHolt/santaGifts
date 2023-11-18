@@ -17,4 +17,9 @@ urlpatterns = [
     path('update_item/<int:pk>', views.UpdateItem, name='update_item'),
     path('delete_item/<int:pk>', views.DeleteItem, name='delete_item'),
 
+    #login/reg/logout
+    path('register/', views.RegisterPage, name='register'),
+    path('login/', views.LoginPage, name='login'),
+    path('logout/', views.LogoutUser, name='logout'),
+
 ]
