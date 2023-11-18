@@ -16,7 +16,7 @@ def allowed_users(allowed_groups=[]):
     def decorator(view_func):
         def wrapper_func(request, *args, **kwargs):
 
-            
+            print('working: ', allowed_groups)
 
             return view_func(request, *args, **kwargs)
         
