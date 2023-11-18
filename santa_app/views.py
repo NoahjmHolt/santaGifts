@@ -19,6 +19,7 @@ class ItemListView(generic.ListView):
       model = Item
 class ItemDetailView(generic.DetailView):
       model = Item
+      
 
 def RegisterPage(request):
 
@@ -37,6 +38,7 @@ def RegisterPage(request):
 
      context = {'form':form}
      return render(request, 'santa_app/register.html', context)
+
 
 def LoginPage(request):
 
@@ -58,9 +60,11 @@ def LoginPage(request):
      context = {}
      return render(request, 'santa_app/login.html', context)
 
+
 def LogoutUser(request):
      logout(request)
      return redirect('login')
+
 
 @login_required(login_url='login')
 def CreateItem(request):
@@ -77,6 +81,7 @@ def CreateItem(request):
      
      return render(request, 'santa_app/item_form.html', context)
 
+
 @login_required(login_url='login')
 def UpdateItem(request, pk):
      
@@ -92,6 +97,7 @@ def UpdateItem(request, pk):
      context = {'item_form':item_form}
 
      return render(request, 'santa_app/item_form.html', context)
+
 
 @login_required(login_url='login')
 def DeleteItem(request, pk):
