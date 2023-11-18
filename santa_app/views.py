@@ -64,6 +64,7 @@ def LogoutUser(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_groups=['admins', 'recipients'])
 def CreateItem(request):
      
      item_form = ItemForm()
@@ -80,6 +81,7 @@ def CreateItem(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_groups=['admins', 'recipients'])
 def UpdateItem(request, pk):
      
      item = Item.objects.get(id=pk)
@@ -97,6 +99,7 @@ def UpdateItem(request, pk):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_groups=['admins'])
 def DeleteItem(request, pk):
      
      item = Item.objects.get(id=pk)
