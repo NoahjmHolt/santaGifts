@@ -5,6 +5,7 @@ from .models import *
 from django.views import generic
 from .forms import *
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -20,14 +21,18 @@ class ItemDetailView(generic.DetailView):
       model = Item
 
 def RegisterPage(request):
-     form = CreateUserForm()
 
-     if request.method == 'POST':
-          form = CreateUserForm(request.POST)
-          if form.is_valid():
-               form.save()
-               messages.success(request, 'Account creation successful!')
-               return redirect('login')
+     if request.user.is_authenticated:
+          return redirect('items')
+     else:
+          form = CreateUserForm()
+
+          if request.method == 'POST':
+               form = CreateUserForm(request.POST)
+               if form.is_valid():
+                    form.save()
+                    messages.success(request, 'Account creation successful!')
+                    return redirect('login')
 
 
      context = {'form':form}
@@ -35,17 +40,20 @@ def RegisterPage(request):
 
 def LoginPage(request):
 
-     if request.method == 'POST':
-          username = request.POST.get('username')
-          password = request.POST.get('password')
+     if request.user.is_authenticated:
+          return redirect('items')
+     else:
+          if request.method == 'POST':
+               username = request.POST.get('username')
+               password = request.POST.get('password')
 
-          user = authenticate(request, username=username, password=password)
+               user = authenticate(request, username=username, password=password)
 
-          if user is not None:
-               login(request, user)
-               return redirect('items')
-          else:
-               messages.info(request, 'Username OR Password is incorrect')
+               if user is not None:
+                    login(request, user)
+                    return redirect('items')
+               else:
+                    messages.info(request, 'Username OR Password is incorrect')
 
      context = {}
      return render(request, 'santa_app/login.html', context)
@@ -54,6 +62,7 @@ def LogoutUser(request):
      logout(request)
      return redirect('login')
 
+@login_required(login_url='login')
 def CreateItem(request):
      
      item_form = ItemForm()
@@ -68,6 +77,7 @@ def CreateItem(request):
      
      return render(request, 'santa_app/item_form.html', context)
 
+@login_required(login_url='login')
 def UpdateItem(request, pk):
      
      item = Item.objects.get(id=pk)
@@ -83,7 +93,7 @@ def UpdateItem(request, pk):
 
      return render(request, 'santa_app/item_form.html', context)
 
-
+@login_required(login_url='login')
 def DeleteItem(request, pk):
      
      item = Item.objects.get(id=pk)
