@@ -1,22 +1,24 @@
 # example from the video
 # Remember: min for django for is 3.8 the extra words are for an OS
 # can choose diferent if wanted, some commands below may be different in different OS
-FROM python:3.8-slim-buster 
+FROM python:3.11.4-alpine
 
 # working directory inside the container
-WORKDIR /santa_app #
+WORKDIR /usr/src/santa_app
 
-# bring over the requirements we already have and run/install
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+# general proper code that most people use to negate common errors
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
 
-# copying our project to the docker folder
-# Remember: . in directories referes to current
-COPY . .
+# make sure everything is up to date and working
+# then installing requirements so smooth ride 
+RUN pip install --upgrade pip
+COPY ./requirements.txt /usr/src/santa_app/requirements.txt
+RUN pip install -r requirements.txt
 
-# finaly, like we have been doing all semester (with 1 extra step)
-# let docker run the server
-# the extra step is that we also need to give the host (even though it is defined in the app itself)
-# this is because the app defines on the local machine (now docker)
-# so we need to map actual local to docker local
-CMD [ "python3", "manage.py", "runserver", "0.0.0.0:8000" ]
+# import entry point and everything else
+COPY ./entrypoint.sh /usr/src/santa_app/entrypoint.sh
+COPY . /usr/src/santa_app/
+
+# now run its
+ENTRYPOINT [ "/usr/src/santa_app/entrypoint.sh" ]
